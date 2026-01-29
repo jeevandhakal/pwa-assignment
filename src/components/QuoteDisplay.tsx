@@ -11,21 +11,18 @@ const QuoteDisplay: React.FC = () => {
 
   const fetchQuote = async () => {
     try {
-      // Using type.fit as it's reliable for client-side fetches
-      const response = await fetch("https://type.fit/api/quotes");
+      const response = await fetch("https://dummyjson.com/quotes/random");
+      if (!response.ok) throw new Error('Network response was not ok');
+
       const data = await response.json();
-      
-      // The API returns an array, so we pick a random one
-      const randomIndex = Math.floor(Math.random() * data.length);
-      const selectedQuote = data[randomIndex];
-      
+      console.log("Fetched Quote:", data);
+
       setQuote({
-        text: selectedQuote.text,
-        author: selectedQuote.author || "Unknown"
+        text: data.quote,
+        author: data.author
       });
     } catch (error) {
-      console.error("Error fetching quote:", error);
-      // Fallback if API fails (important for the offline requirement!)
+      console.error("CORS or Network Error:", error);
       setQuote({
         text: "Believe you can and you're halfway there.",
         author: "Theodore Roosevelt"
