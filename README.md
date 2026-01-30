@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# MCDA 5550 – PWA Assignment: Task Planner & Motivator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A Progressive Web App (PWA) that combines task management with motivational content. This application allows users to manage to-do lists with deadlines while providing a random motivational quote on load. It is designed to work reliably offline using Service Workers and IndexedDB.
 
-Currently, two official plugins are available:
+## 🚀 Features
+- **Task Management**: Add, view, and delete tasks with specific deadlines.
+- **Motivational Quotes**: Fetches a random quote from the DummyJSON API on load, with a hardcoded fallback for offline resiliency.
+- **Visual Deadline Indicators**: Tasks are color-coded based on urgency:
+  - 🔴 **Red**: Deadline has passed.
+  - 🟠 **Orange**: Deadline is less than 3 days away.
+  - 🟡 **Yellow**: Deadline is within a week.
+- **PWA Capabilities**: 
+  - Installable on mobile and desktop.
+  - Works offline via Service Worker caching.
+  - Temporary toast notifications for Online/Offline status changes.
+- **Data Persistence**: Uses **IndexedDB** (via Dexie.js) to ensure tasks persist across reloads and restarts.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠️ Technical Stack
+- **Framework**: React with Vite.
+- **Language**: TypeScript for type-safe development.
+- **State Management**: React Hooks (`useState`, `useEffect`).
+- **Database**: IndexedDB with **Dexie.js**.
+- **PWA Plugin**: `vite-plugin-pwa` for manifest and service worker generation.
 
-## React Compiler
+## 📦 Setup Instructions
+1. **Clone the repository**:
+   ```Bash
+   git clone git@github.com:jeevandhakal/pwa-assignment.git
+   ```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+2. Install dependencies:
+   ```Bash
+   pnpm install
+   ```
 
-## Expanding the ESLint configuration
+3. Run in Development mode:
+   ```Bash
+   pnpm 
+   ````
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+4. Build and Preview (To test PWA functionality):
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+   ```Bash
+   pnpm build
+   pnpm preview
+   ```
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## 📝 Assumptions & External Resources
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- API: Used https://dummyjson.com/quotes/random for motivational quotes to ensure better CORS compatibility than other providers.
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- Asset Generation: PWA icons (192x192 and 512x512) were generated using favicon.io.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+
+- Offline Logic: Assumed the user needs a clear but non-intrusive indicator; implemented a top-right "Toast" notification that disappears after 4 seconds.
+
+
+- Logic: Deadline color calculations based on local system time.
+
+## 👨‍💻 Author
+- Jeevan Dhakal
+
+- Student ID: #A00494615
