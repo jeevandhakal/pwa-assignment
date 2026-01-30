@@ -29,9 +29,9 @@ const TaskForm: React.FC = () => {
   return (
     <section>
       <h3>Add New Task</h3>
-      <form onSubmit={addTask}>
-        <div>
-          <label htmlFor="task">Task:</label>
+      <form onSubmit={addTask} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <label htmlFor="task" style={{ fontWeight: 'bold', textAlign: 'left' }}>Task Description</label>
           <input
             id="task"
             type="text"
@@ -39,19 +39,23 @@ const TaskForm: React.FC = () => {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="What needs to be done?"
             required
+            style={{ padding: '12px', borderRadius: '8px', border: '1px solid #444', background: '#1e1e1e', color: 'white' }}
           />
         </div>
-        <div>
-          <label htmlFor="deadline">Deadline:</label>
+
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <label htmlFor="deadline" style={{ fontWeight: 'bold', textAlign: 'left' }}>Deadline Date</label>
           <input
             id="deadline"
             type="date"
             value={deadline}
             onChange={(e) => setDeadline(e.target.value)}
             required
+            style={{ padding: '12px', borderRadius: '8px', border: '1px solid #444', background: '#1e1e1e', color: 'white' }}
           />
         </div>
-        <button type="submit">Add Task</button>
+
+        <button type="submit" className="add-task-btn">Add Task</button>
       </form>
     </section>
   );
