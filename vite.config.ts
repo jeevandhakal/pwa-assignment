@@ -26,6 +26,25 @@ export default defineConfig({
             type: 'image/png'
           }
         ]
+      },
+      workbox: {
+        // Define runtime caching for the quotes API
+        runtimeCaching: [
+          {
+            urlPattern: ({ url }) => url.origin === 'https://dummyjson.com' && url.pathname === '/quotes/random',
+            handler: 'NetworkFirst', // Try network first, fall back to cache if offline
+            options: {
+              cacheName: 'quotes-api-cache',
+              expiration: {
+                maxEntries: 10,
+                maxAgeSeconds: 60 * 60 * 24 // Cache for 24 hours
+              },
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
+            }
+          }
+        ]
       }
     })
   ],

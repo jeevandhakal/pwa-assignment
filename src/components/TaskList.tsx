@@ -14,14 +14,14 @@ const TaskList: React.FC = () => {
 
     const diffInDays = Math.ceil((deadline.getTime() - today.getTime()) / (1000 * 60 * 60 * 24));
 
-    if (diffInDays < 0) return 'deadline-passed'; // Red [cite: 26]
-    if (diffInDays < 3) return 'deadline-close';  // Orange [cite: 26]
-    if (diffInDays <= 7) return 'deadline-approaching'; // Yellow [cite: 26]
+    if (diffInDays < 0) return 'deadline-passed'; // Red 
+    if (diffInDays < 3) return 'deadline-close';  // Orange 
+    if (diffInDays <= 7) return 'deadline-approaching'; // Yellow 
     return '';
   };
 
   const deleteTask = async (id?: number) => {
-    if (id) await db.tasks.delete(id); // [cite: 60, 61, 62]
+    if (id) await db.tasks.delete(id); 
   };
 
   if (!tasks) return null;
